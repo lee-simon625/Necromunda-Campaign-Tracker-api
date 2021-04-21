@@ -85,6 +85,12 @@ public class Campaign {
     public void territoryInfo(){
         System.out.println(territoriesToString());
     }
+
+    public void addTerritoryToGang() {
+
+
+
+    }
 }
     /*
 todo also have a second fancy print for the whole campaign with status of each gang and what territories they have

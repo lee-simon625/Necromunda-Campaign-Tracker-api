@@ -46,6 +46,7 @@ public class Main {
                 System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
 
                 System.out.println("Enter territories name:    ");
+                String usless = keyboard.nextLine();
                 String name = keyboard.nextLine();
                 System.out.println("Enter the income: ");
                 String income = keyboard.nextLine();
@@ -77,7 +78,8 @@ public class Main {
                 System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
 
                 System.out.println("Enter player's name:    ");
-                String player = keyboard.next();
+                String useless = keyboard.nextLine();
+                String player = keyboard.nextLine();
                 System.out.println("Enter the gang's name: ");
                 String name = keyboard.nextLine();
                 System.out.println("Enter what type of gang it is:  ");
@@ -110,4 +112,3 @@ public class Main {
 }
 
 
-//todo while loop to infinitely loop, keyboard entry with text based menu
