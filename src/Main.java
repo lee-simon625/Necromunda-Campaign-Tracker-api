@@ -1,38 +1,113 @@
 import objects.Campaign;
 
+import java.util.Scanner;
+
 
 public class Main {
+
+
     public static void main(String[] args) {
 
-
+        Scanner keyboard = new Scanner(System.in);
         Campaign campaign = new Campaign();
 
 
-        campaign.createGang("Dom's Gang", "Delaque", 1000);
-        campaign.createGang("Tom's Gang", "Escher", 1005);
-        campaign.createGang("Phil's Gang", "Bounty Hunters", 985);
-        campaign.createGang("Simon's Gang", "Genestealer Cult", 1000);
-        campaign.createGang("David's Gang", "Corpse Grinder", 1000);
+        System.out.println("Necromunda Campaign Tracker");
+
+        while (true) {
+
+            System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+            System.out.println("1)  Campaign Info");
+            System.out.println("2)  Territory Info");
+            System.out.println("3)  Create Territory");
+            System.out.println("4)  Remove Territory");
+            System.out.println("5)  Gang Info");
+            System.out.println("6)  Create Gang");
+            System.out.println("7)  Remove Gang");
+            System.out.println("8) Quit");
+
+            System.out.print("\nWhich option:   ");
+
+            int option = keyboard.nextInt();
+            System.out.println();
+
+            if (option == 1) {
+
+                System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                campaign.campaignInfo();
+
+            } else if (option == 2) {
+
+                System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                campaign.territoryInfo();
+
+            } else if (option == 3) {
+
+                System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+
+                System.out.println("Enter territories name:    ");
+                String name = keyboard.nextLine();
+                System.out.println("Enter the income: ");
+                String income = keyboard.nextLine();
+                System.out.println("Enter what it can recruit:  ");
+                String recruit = keyboard.nextLine();
+                System.out.println("Enter any equipment it gives: ");
+                String equipment = keyboard.nextLine();
+                System.out.println("Enter any special bonuses it provides: ");
+                String special = keyboard.nextLine();
+                System.out.println("Enter any reputation it can give: ");
+                int reputation = keyboard.nextInt();
+
+                campaign.createTerritory(name, income, recruit, equipment, special, reputation);
+
+            } else if (option == 4) {
+
+                System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                System.out.print(("Enter the ID of the territory to delete:  "));
+                int id = keyboard.nextInt();
+                campaign.removeTerritory(id);
+
+            } else if (option == 5) {
+
+                System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                campaign.gangInfo();
+
+            } else if (option == 6) {
+
+                System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+
+                System.out.println("Enter player's name:    ");
+                String player = keyboard.next();
+                System.out.println("Enter the gang's name: ");
+                String name = keyboard.nextLine();
+                System.out.println("Enter what type of gang it is:  ");
+                String gangType = keyboard.nextLine();
+                System.out.println("Enter the gangs total vale: ");
+                int totalValue = keyboard.nextInt();
+
+                campaign.createGang(player, name, gangType, totalValue);
+
+            } else if (option == 7) {
+
+                System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+                System.out.print(("Enter the ID of the gang to delete:  "));
+                int id = keyboard.nextInt();
+                campaign.removeGang(id);
+
+            } else if (option == 8) {
+
+                break;
+
+            }
 
 
+        }
 
-//        Territories oldRuin = new Territories("Old Ruin", "D3x10 +10 per Dome Runner", "None", "None", "None", 0);
-//        Territories settlement = new Territories("Settlement", "D6x10", "Roll 2D6, One 6 = Juve, Two 6 = Ganger", "None", "None", 1);
-
-
-
-        System.out.println(campaign.gangsToString());
-//        System.out.println(listOfTerritories);
-//        System.out.println("There are "+listOfTerritories.toArray().length+ " territories");
-          System.out.println("There are "+ campaign.countGangs()+ " gangs");
 
     }
 
+
 }
-/*
-
-update the toString for each object
 
 
-
- */
+//todo while loop to infinitely loop, keyboard entry with text based menu

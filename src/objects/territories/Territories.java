@@ -1,7 +1,6 @@
 package objects.territories;
 
 
-
 public class Territories {
 
     protected String name;
@@ -36,8 +35,3 @@ public class Territories {
 
 
 }
-
-/*
-
- territories to have all fields filled out as discussed
- */

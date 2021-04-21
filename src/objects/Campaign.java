@@ -1,28 +1,33 @@
 package objects;
 
 import objects.gangs.Gang;
-import objects.gangs.LawfulGang;
+import objects.territories.Territories;
+
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Campaign {
 
-    //private ArrayList<Territories> territories = new ArrayList<>();
-    private HashMap<String, Gang> gangs = new HashMap<>();
+    private HashMap<Integer, Territories> territories = new HashMap();
+    private HashMap<Integer, Gang> gangs = new HashMap<>();
 
 
-    public void createGang(String name, String gangType, int totalValue) {
-        gangs.put(name, new LawfulGang(name, gangType, totalValue));
+    public void createGang(String player, String name, String gangType, int totalValue) {
+        int id = gangs.size() + 1;
+        gangs.put(id, new Gang(player, name, gangType, totalValue));
+        System.out.println("New gang Created with ID "+id);
 
 
     }
 
-    public void removeGang(String name) {
+    public void removeGang(int id) {
 
-        gangs.remove(name);
+        gangs.remove(id);
 
     }
 
     public int countGangs() {
+
         return gangs.size();
     }
 
@@ -39,12 +44,48 @@ public class Campaign {
 
     }
 
+    public void createTerritory(String name, String income, String recruit, String equipment, String special, int reputation) {
+        int id = territories.size() + 1;
+        territories.put(id, new Territories(name, income, recruit, equipment, special, reputation));
+        System.out.println("New territory Created with ID "+id);
 
+    }
+
+    public void removeTerritory(int id) {
+
+        territories.remove(id);
+
+    }
+
+    public int countTerritories() {
+
+        return territories.size();
+
+    }
+
+    public String territoriesToString(){
+        String compiledString = "";
+
+        for (Territories territories : territories.values()) {
+            compiledString += territories.toString();
+        }
+
+        return compiledString;
+    }
+
+    public void campaignInfo() {
+        System.out.println("There are :\n " +"  "+ countGangs() + " gangs \n" +
+                "   "+ countTerritories() + " territories");
+    }
+
+    public void gangInfo(){
+        System.out.println(gangsToString());
+    }
+
+    public void territoryInfo(){
+        System.out.println(territoriesToString());
+    }
 }
     /*
-todo campaign should print number of gangs and number of territories
 todo also have a second fancy print for the whole campaign with status of each gang and what territories they have
-todo make method that calls the constructors for both gangs and territories and adds it to the campaign list
-todo change gangs hashmap to index on int then do territories the same way
-todo
      */
