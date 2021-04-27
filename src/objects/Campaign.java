@@ -35,8 +35,9 @@ public class Campaign {
         String compiledString = "";
 
 
-        for (Gang gang : gangs.values()) {
-            compiledString += gang.toString();
+        for (int gangID : gangs.keySet()) {
+            compiledString +="\nGang ID = " + gangID+ gangs.get(gangID).toString();
+
         }
 
 
@@ -86,9 +87,8 @@ public class Campaign {
         System.out.println(territoriesToString());
     }
 
-    public void addTerritoryToGang() {
-
-
+    public void addTerritoryToGang(int territoryID, int gangID) {
+        gangs.get(gangID).addTerritory(territoryID);
 
     }
 }
