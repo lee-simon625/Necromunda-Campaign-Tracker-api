@@ -4,7 +4,6 @@ import objects.gangs.Gang;
 import objects.territories.Territories;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Campaign {
 
@@ -36,7 +35,7 @@ public class Campaign {
 
 
         for (int gangID : gangs.keySet()) {
-            compiledString +="\nGang ID = " + gangID+ gangs.get(gangID).toString();
+            compiledString += "\nGang ID : " + gangID+ gangs.get(gangID).toString();
 
         }
 
@@ -67,8 +66,8 @@ public class Campaign {
     public String territoriesToString(){
         String compiledString = "";
 
-        for (Territories territories : territories.values()) {
-            compiledString += territories.toString();
+        for (int territoryID : territories.keySet()) {
+            compiledString +="\nTerritory ID : "+ territoryID + territories.get(territoryID).toString();
         }
 
         return compiledString;
