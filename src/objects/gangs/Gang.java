@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Gang {
 
+
     protected String player;
     protected String name;
     protected String gangType;
@@ -14,8 +15,6 @@ public class Gang {
     protected ArrayList<Integer> ownedTerritories;
 
 
-
-
     public Gang(String player, String name, String gangType, int totalValue) {
         this.player = player;
         this.name = name;
@@ -24,7 +23,7 @@ public class Gang {
         this.setDefault();
     }
 
-    public void addTerritory(int territoryID){
+    public void addTerritory(int territoryID) {
         ownedTerritories.add(territoryID);
     }
 
@@ -45,7 +44,7 @@ public class Gang {
     }
 
     public String getName() {
-        return name;
+        return player;
     }
 }
 

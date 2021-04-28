@@ -10,11 +10,11 @@ public class Main {
 
         Scanner keyboard = new Scanner(System.in);
         Campaign campaign = new Campaign();
-        boolean whileloop = true;
+        boolean whileLoop = true;
 
         System.out.println("Necromunda Campaign Tracker");
 
-        while (whileloop) {
+        while (whileLoop) {
 
             System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
             System.out.println("1)  Campaign Info");
@@ -40,16 +40,15 @@ public class Main {
                 case 5 -> campaign.gangInfo();
                 case 6 -> createGang(keyboard, campaign);
                 case 7 -> removeGang(keyboard, campaign);
-
-                //                   campaign.addTerritoryToGang(keyboard);
-                default -> whileloop = false;
+                case 8 -> addTerritoryToGang(keyboard, campaign);
+                default -> whileLoop = false;
             }
 
         }
 
     }
 
-    private static void createTerritory(Scanner keyboard, Campaign campaign) {
+    private static int createTerritory(Scanner keyboard, Campaign campaign) {
 
         System.out.println("Enter territories name:    ");
         String name = keyboard.nextLine();
@@ -64,16 +63,17 @@ public class Main {
         System.out.println("Enter any reputation it can give: ");
         int reputation = userIntInput(keyboard);
 
-        campaign.createTerritory(name, income, recruit, equipment, special, reputation);
+        return campaign.createTerritory(name, income, recruit, equipment, special, reputation);
     }
 
     private static void removeTerritory(Scanner keyboard, Campaign campaign) {
         System.out.print(("Enter the ID of the territory to delete:  "));
+        System.out.println(campaign.territoryIdName());
         int id = userIntInput(keyboard);
         campaign.removeTerritory(id);
     }
 
-    private static void createGang(Scanner keyboard, Campaign campaign) {
+    private static int createGang(Scanner keyboard, Campaign campaign) {
         System.out.println("Enter player's name:    ");
         String player = keyboard.nextLine();
         System.out.println("Enter the gang's name: ");
@@ -82,19 +82,50 @@ public class Main {
         String gangType = keyboard.nextLine();
         System.out.println("Enter the gangs total vale: ");
         int totalValue = userIntInput(keyboard);
-
-        campaign.createGang(player, name, gangType, totalValue);
+        return campaign.createGang(player, name, gangType, totalValue);
     }
 
     private static void removeGang(Scanner keyboard, Campaign campaign) {
         System.out.print(("Enter the ID of the gang to delete:  "));
+        System.out.println(campaign.gangsIdName());
         int id = userIntInput(keyboard);
         campaign.removeGang(id);
     }
 
-    /*private static void addTerritoryToGang() {
+    private static void addTerritoryToGang(Scanner keyboard, Campaign campaign) {
 
-    }*/
+        System.out.println("Please select the gang you wish to add it to : \n");
+        System.out.println(campaign.gangsIdName());
+        System.out.println("0 : New Gang");
+
+        int gangOption = userIntInput(keyboard);
+        int gangID;
+
+        if (gangOption == 0) {
+            gangID = (createGang(keyboard, campaign));
+        } else {
+            gangID = gangOption;
+        }
+
+        System.out.println("Please select the territory you wish to add to them : \n");
+        System.out.println(campaign.territoryIdName());
+        System.out.println("0 : New Territory");
+
+        int territoryOption = userIntInput(keyboard);
+        int territoryID;
+
+        if (territoryOption == 0) {
+            territoryID = (createTerritory(keyboard, campaign));
+        } else {
+            territoryID = territoryOption;
+        }
+        campaign.addTerritoryToGang(gangID, territoryID);
+        System.out.println("Press 1 if you wish to add another, or 2 to return to the menu : ");
+        int again = userIntInput(keyboard);
+        if (again == 1){
+            addTerritoryToGang(keyboard, campaign);
+        }
+    }
 
     private static Integer userInputMenu(Scanner keyboard) {
 

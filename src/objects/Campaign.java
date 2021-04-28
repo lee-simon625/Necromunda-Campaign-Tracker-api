@@ -11,10 +11,11 @@ public class Campaign {
     private HashMap<Integer, Gang> gangs = new HashMap<>();
 
 
-    public void createGang(String player, String name, String gangType, int totalValue) {
+    public int createGang(String player, String name, String gangType, int totalValue) {
         int id = gangs.size() + 1;
         gangs.put(id, new Gang(player, name, gangType, totalValue));
-        System.out.println("New gang Created with ID "+id);
+        System.out.println("New gang Created with ID " + id);
+        return id;
 
 
     }
@@ -35,7 +36,7 @@ public class Campaign {
 
 
         for (int gangID : gangs.keySet()) {
-            compiledString += "\nGang ID : " + gangID+ gangs.get(gangID).toString();
+            compiledString += gangs.get(gangID).toString();
 
         }
 
@@ -44,10 +45,25 @@ public class Campaign {
 
     }
 
-    public void createTerritory(String name, String income, String recruit, String equipment, String special, int reputation) {
+    public String gangsIdName() {
+        String compiledString = "";
+
+
+        for (int gangID : gangs.keySet()) {
+            compiledString += "\n" + gangID + " : " + gangs.get(gangID).getName();
+
+        }
+
+
+        return compiledString;
+
+    }
+
+    public int createTerritory(String name, String income, String recruit, String equipment, String special, int reputation) {
         int id = territories.size() + 1;
         territories.put(id, new Territories(name, income, recruit, equipment, special, reputation));
-        System.out.println("New territory Created with ID "+id);
+        System.out.println("New territory Created with ID " + id);
+        return id;
 
     }
 
@@ -63,30 +79,44 @@ public class Campaign {
 
     }
 
-    public String territoriesToString(){
+    public String territoriesToString() {
         String compiledString = "";
 
         for (int territoryID : territories.keySet()) {
-            compiledString +="\nTerritory ID : "+ territoryID + territories.get(territoryID).toString();
+            compiledString +=  territories.get(territoryID).toString();
         }
 
         return compiledString;
     }
 
-    public void campaignInfo() {
-        System.out.println("There are :\n " +"  "+ countGangs() + " gangs \n" +
-                "   "+ countTerritories() + " territories");
+    public String territoryIdName() {
+        String compiledString = "";
+
+
+        for (int territoryID : territories.keySet()) {
+            compiledString += "\n" + territoryID + " : " + territories.get(territoryID).getName();
+
+        }
+
+
+        return compiledString;
+
     }
 
-    public void gangInfo(){
+    public void campaignInfo() {
+        System.out.println("There are :\n " + "  " + countGangs() + " gangs \n" +
+                "   " + countTerritories() + " territories");
+    }
+
+    public void gangInfo() {
         System.out.println(gangsToString());
     }
 
-    public void territoryInfo(){
+    public void territoryInfo() {
         System.out.println(territoriesToString());
     }
 
-    public void addTerritoryToGang(int territoryID, int gangID) {
+    public void addTerritoryToGang(int gangID, int territoryID) {
         gangs.get(gangID).addTerritory(territoryID);
 
     }
