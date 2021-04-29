@@ -3,16 +3,20 @@ package objects;
 import objects.gangs.Gang;
 import objects.territories.Territories;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Campaign {
 
     private HashMap<Integer, Territories> territories = new HashMap();
     private HashMap<Integer, Gang> gangs = new HashMap<>();
+    private ArrayList<Integer> gangID = new ArrayList<Integer>();
+    private ArrayList<Integer> territoryID = new ArrayList<Integer>();
 
 
     public int createGang(String player, String name, String gangType, int totalValue) {
-        int id = gangs.size() + 1;
+        int id = gangID.size() + 1;
+        gangID.add(id);
         gangs.put(id, new Gang(player, name, gangType, totalValue));
         System.out.println("New gang Created with ID " + id);
         return id;
@@ -60,7 +64,8 @@ public class Campaign {
     }
 
     public int createTerritory(String name, String income, String recruit, String equipment, String special, int reputation) {
-        int id = territories.size() + 1;
+        int id = territoryID.size() + 1;
+        territoryID.add(id);
         territories.put(id, new Territories(name, income, recruit, equipment, special, reputation));
         System.out.println("New territory Created with ID " + id);
         return id;
@@ -83,7 +88,7 @@ public class Campaign {
         String compiledString = "";
 
         for (int territoryID : territories.keySet()) {
-            compiledString +=  territories.get(territoryID).toString();
+            compiledString += territories.get(territoryID).toString();
         }
 
         return compiledString;

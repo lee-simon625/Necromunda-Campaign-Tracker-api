@@ -82,7 +82,7 @@ public class Main {
         String gangType = keyboard.nextLine();
         System.out.println("Enter the gangs total vale: ");
         int totalValue = userIntInput(keyboard);
-        return campaign.createGang(player, name, gangType, totalValue);
+        return (campaign.createGang(player, name, gangType, totalValue));
     }
 
     private static void removeGang(Scanner keyboard, Campaign campaign) {
@@ -122,7 +122,7 @@ public class Main {
         campaign.addTerritoryToGang(gangID, territoryID);
         System.out.println("Press 1 if you wish to add another, or 2 to return to the menu : ");
         int again = userIntInput(keyboard);
-        if (again == 1){
+        if (again == 1) {
             addTerritoryToGang(keyboard, campaign);
         }
     }
