@@ -1,5 +1,6 @@
 import objects.Campaign;
 
+
 import java.util.Scanner;
 
 
@@ -13,6 +14,9 @@ public class Main {
         boolean whileLoop = true;
 
         System.out.println("Necromunda Campaign Tracker");
+        campaign.initialiseTerritories();
+        campaign.createGang("Simon", "Three Arms", "Genestealer Cult", 1000);
+        campaign.createGang("Dom", "Gangsters", "Delaque", 1000);
 
         while (whileLoop) {
 
@@ -25,6 +29,7 @@ public class Main {
             System.out.println("6)  Create Gang");
             System.out.println("7)  Remove Gang");
             System.out.println("8)  Add Territory to Gang");
+            System.out.println("9)  Move Territory to Gang");
             System.out.println("Press Any Other key to Quit");
 
             System.out.print("\nWhich option:   ");
@@ -35,12 +40,13 @@ public class Main {
             switch (option) {
                 case 1 -> campaign.campaignInfo();
                 case 2 -> campaign.territoryInfo();
-                case 3 -> createTerritory(keyboard, campaign);
+                case 3 -> addTerritoryToCampaign(keyboard, campaign);
                 case 4 -> removeTerritory(keyboard, campaign);
                 case 5 -> campaign.gangInfo();
                 case 6 -> createGang(keyboard, campaign);
                 case 7 -> removeGang(keyboard, campaign);
                 case 8 -> addTerritoryToGang(keyboard, campaign);
+                case 9 -> moveTerritory(keyboard, campaign);
                 default -> whileLoop = false;
             }
 
@@ -108,14 +114,14 @@ public class Main {
         }
 
         System.out.println("Please select the territory you wish to add to them : \n");
-        System.out.println(campaign.territoryIdName());
+        System.out.println(campaign.territoriesInPlayIdName());
         System.out.println("0 : New Territory");
 
         int territoryOption = userIntInput(keyboard);
         int territoryID;
 
         if (territoryOption == 0) {
-            territoryID = (createTerritory(keyboard, campaign));
+            territoryID = (addTerritoryToCampaign(keyboard, campaign));
         } else {
             territoryID = territoryOption;
         }
@@ -126,6 +132,38 @@ public class Main {
             addTerritoryToGang(keyboard, campaign);
         }
     }
+
+    private static int addTerritoryToCampaign(Scanner keyboard, Campaign campaign) {
+        System.out.println("Please select the territory you wish to add : \n");
+        System.out.println(campaign.territoryIdName());
+        int territoryOption = userIntInput(keyboard);
+        return campaign.addTerritoryToCampaign(territoryOption);
+    }
+
+    private static void moveTerritory(Scanner keyboard, Campaign campaign) {
+        System.out.println("Please select the gang you wish move it from : \n");
+        System.out.println(campaign.gangsIdName());
+
+        int gangOneID = userIntInput(keyboard);
+
+        System.out.println("Please select the territory you wish to move : \n");
+        System.out.println(campaign.ownedTerritoryIdName(gangOneID));
+
+        int territoryID = userIntInput(keyboard);
+
+        System.out.println("Please select the gang you wish move it to : \n");
+        System.out.println(campaign.gangsIdName());
+
+        int gangTwoID = userIntInput(keyboard);
+
+
+        campaign.removeTerritoryFromGang(gangOneID, territoryID);
+
+        campaign.addTerritoryToGang(gangTwoID, territoryID);
+
+    }
+
+
 
     private static Integer userInputMenu(Scanner keyboard) {
 
@@ -152,6 +190,7 @@ public class Main {
         }
         return userIntInput(keyboard);
     }
+
 }
 
 

@@ -1,8 +1,10 @@
 package objects.gangs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Gang {
+public class Gangs {
 
 
     protected String player;
@@ -11,11 +13,10 @@ public class Gang {
     protected int totalValue;
     protected int reputation;
     protected int totalWins;
-    protected int territoryID;
-    protected ArrayList<Integer> ownedTerritories;
+    public Set<Integer> ownedTerritories;
 
 
-    public Gang(String player, String name, String gangType, int totalValue) {
+    public Gangs(String player, String name, String gangType, int totalValue) {
         this.player = player;
         this.name = name;
         this.gangType = gangType;
@@ -27,6 +28,10 @@ public class Gang {
         ownedTerritories.add(territoryID);
     }
 
+    public void removeTerritory(int territoryID) {
+        ownedTerritories.remove(territoryID);
+    }
+
 
     @Override
     public String toString() {
@@ -34,13 +39,13 @@ public class Gang {
                 "   Total Value : " + totalValue + " Credits\n" +
                 "   Reputation  : " + reputation + "\n" +
                 "   Total Wins  : " + totalWins + "\n" +
-                "   Territories : " + ownedTerritories.size();
+                "   Territories : " + ownedTerritories.size() + "\n";
     }
 
     public void setDefault() {
         this.reputation = 1;
         this.totalWins = 0;
-        this.ownedTerritories = new ArrayList<>();
+        this.ownedTerritories = new HashSet<>();
     }
 
     public String getName() {
