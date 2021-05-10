@@ -3,7 +3,6 @@ import objects.Campaign;
 
 import java.util.Scanner;
 
-
 public class Main {
 
 
@@ -17,7 +16,9 @@ public class Main {
         campaign.initialiseTerritories();
         campaign.createGang("Simon", "Three Arms", "Genestealer Cult", 1000);
         campaign.createGang("Dom", "Gangsters", "Delaque", 1000);
-
+       Mysql.Connect();
+        //Mysql.OwnedTerritory();
+        Mysql.UnownedTerritory();
         while (whileLoop) {
 
             System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
