@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Gangs {
+public class Gang {
 
 
     protected String player;
@@ -16,7 +16,7 @@ public class Gangs {
     public Set<Integer> ownedTerritories;
 
 
-    public Gangs(String player, String name, String gangType, int totalValue) {
+    public Gang(String player, String name, String gangType, int totalValue) {
         this.player = player;
         this.name = name;
         this.gangType = gangType;

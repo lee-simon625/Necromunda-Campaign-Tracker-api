@@ -1,6 +1,9 @@
+import data.MySQLService;
+import data.dao.TerritoryDao;
 import objects.Campaign;
 
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -13,12 +16,22 @@ public class Main {
         boolean whileLoop = true;
 
         System.out.println("Necromunda Campaign Tracker");
-        campaign.initialiseTerritories();
+
         campaign.createGang("Simon", "Three Arms", "Genestealer Cult", 1000);
         campaign.createGang("Dom", "Gangsters", "Delaque", 1000);
-       Mysql.Connect();
-        //Mysql.OwnedTerritory();
+        /*Mysql.AllTerritories();
+        Mysql.OwnedTerritory();
         Mysql.UnownedTerritory();
+        Mysql.AllTerritoryOwner();*/
+        MySQLService service = new MySQLService();
+        TerritoryDao territoryDao = new TerritoryDao();
+        try {
+           System.out.println(territoryDao.list(service).toString());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
         while (whileLoop) {
 
             System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
@@ -55,7 +68,7 @@ public class Main {
 
     }
 
-    private static int createTerritory(Scanner keyboard, Campaign campaign) {
+  /*  private static int createTerritory(Scanner keyboard, Campaign campaign) {
 
         System.out.println("Enter territories name:    ");
         String name = keyboard.nextLine();
@@ -71,7 +84,7 @@ public class Main {
         int reputation = userIntInput(keyboard);
 
         return campaign.createTerritory(name, income, recruit, equipment, special, reputation);
-    }
+    }*/
 
     private static void removeTerritory(Scanner keyboard, Campaign campaign) {
         System.out.print(("Enter the ID of the territory to delete:  "));
@@ -163,7 +176,6 @@ public class Main {
         campaign.addTerritoryToGang(gangTwoID, territoryID);
 
     }
-
 
 
     private static Integer userInputMenu(Scanner keyboard) {

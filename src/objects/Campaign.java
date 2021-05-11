@@ -1,26 +1,26 @@
 package objects;
 
-import objects.gangs.Gangs;
-import objects.territories.Territories;
+import objects.gangs.Gang;
+import objects.territories.Territory;
 
 import java.util.HashMap;
 import java.util.Set;
 
 public class Campaign {
 
-    private HashMap<Integer, Territories> territories = new HashMap();
+    private HashMap<Integer, Territory> territories = new HashMap();
     private HashMap<Integer, Integer> territoriesInPlay = new HashMap();
-    private HashMap<Integer, Gangs> gangs = new HashMap<>();
+    private HashMap<Integer, Gang> gangs = new HashMap<>();
 
 
-    public void initialiseTerritories() {
+    /*public void initialiseTerritories() {
         createTerritory("Old Ruins", "D3x10 + 10 per Dome Runner", "-", "-", "-", 0);
         createTerritory("Settlement", "D6x10", "Roll 2D6. One die rolls a 6: Juve. Both roll 6: Ganger (instead)", "-", "-", 0);
         createTerritory("Rogue Doc Shop", "-", "Rogue Doc", "-", "-", 0);
         createTerritory("Promethium Cache", "-", "-", "3 fighters gain Incendiary charges", "Re-roll any Ammo checks for Blaze weapons", 0);
         createTerritory("Wastes", "-", "-", "-", "If challenged in the Phase 1, choose which Territory is at stake.\n       If challenged in the Phase 3 for a Resource already controlled by the gang,\n      the Leader can try to pass an Intelligence check to play as Attacker on the Ambush scenario instead of rolling.", 0);
 
-    }
+    }*/
 
     public int createGang(String player, String name, String gangType, int totalValue) {
         int id = 1;
@@ -29,7 +29,7 @@ public class Campaign {
                 id = gangID + 1;
             }
         }
-        gangs.put(id, new Gangs(player, name, gangType, totalValue));
+        gangs.put(id, new Gang(player, name, gangType, totalValue));
         System.out.println("New gang Created with ID " + id);
         return id;
 
@@ -75,6 +75,7 @@ public class Campaign {
 
     }
 
+/*
     public int createTerritory(String name, String income, String recruit, String equipment, String special, int reputation) {
         int id = 1;
         for (int territoryID : territories.keySet()) {
@@ -82,11 +83,11 @@ public class Campaign {
                 id = territoryID + 1;
             }
         }
-        territories.put(id, new Territories(name, income, recruit, equipment, special, reputation));
+        territories.put(id, new Territory(name, income, recruit, equipment, special, reputation));
         System.out.println("New territory Created with ID " + id);
         return id;
-
     }
+*/
 
     public int addTerritoryToCampaign(int territoryID) {
         int id = 1;
