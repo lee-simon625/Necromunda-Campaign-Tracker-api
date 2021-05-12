@@ -4,9 +4,7 @@ import data.MySQLService;
 import data.mappers.TerritoryMapper;
 import objects.territories.Territory;
 
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class TerritoryDao {

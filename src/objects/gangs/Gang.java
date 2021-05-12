@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Gang {
 
-
+    protected  Integer id;
     protected String player;
     protected String name;
     protected String gangType;
@@ -16,7 +16,8 @@ public class Gang {
     public Set<Integer> ownedTerritories;
 
 
-    public Gang(String player, String name, String gangType, int totalValue) {
+    public Gang(Integer id,String player, String name, String gangType, int totalValue) {
+        this.id = id;
         this.player = player;
         this.name = name;
         this.gangType = gangType;

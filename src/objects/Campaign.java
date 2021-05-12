@@ -29,7 +29,7 @@ public class Campaign {
                 id = gangID + 1;
             }
         }
-        gangs.put(id, new Gang(player, name, gangType, totalValue));
+        gangs.put(id, new Gang(id, player, name, gangType, totalValue));
         System.out.println("New gang Created with ID " + id);
         return id;
 

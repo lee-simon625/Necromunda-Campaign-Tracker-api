@@ -1,4 +1,5 @@
 import data.MySQLService;
+import data.dao.GangDao;
 import data.dao.TerritoryDao;
 import objects.Campaign;
 
@@ -17,14 +18,22 @@ public class Main {
 
         System.out.println("Necromunda Campaign Tracker");
 
-        campaign.createGang("Simon", "Three Arms", "Genestealer Cult", 1000);
+       /* campaign.createGang("Simon", "Three Arms", "Genestealer Cult", 1000);
         campaign.createGang("Dom", "Gangsters", "Delaque", 1000);
-        /*Mysql.AllTerritories();
+        Mysql.AllTerritories();
         Mysql.OwnedTerritory();
         Mysql.UnownedTerritory();
         Mysql.AllTerritoryOwner();*/
         MySQLService service = new MySQLService();
         TerritoryDao territoryDao = new TerritoryDao();
+        GangDao gangDao = new GangDao();
+
+        try{
+            System.out.print(gangDao.list(service).toString());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         try {
            System.out.println(territoryDao.list(service).toString());
         } catch (SQLException throwables) {

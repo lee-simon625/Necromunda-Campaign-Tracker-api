@@ -1,6 +1,5 @@
 package data.mappers;
 
-import com.mysql.cj.protocol.ResultsetRow;
 import objects.territories.Territory;
 
 import java.sql.ResultSet;
@@ -17,7 +16,12 @@ public class TerritoryMapper {
                 rs.getString("recruit"),
                 rs.getString("equipment"),
                 rs.getString("special"),
-                rs.getInt("reputation"));
+                rs.getInt("reputation"),
+                rs.getString("gang_income"),
+                rs.getString("gang_recruit"),
+                rs.getString("gang_equipment"),
+                rs.getString("gang_special"),
+                rs.getInt("gang_reputation"));
 
 
     }
