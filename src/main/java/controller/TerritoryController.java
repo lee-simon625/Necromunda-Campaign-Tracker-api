@@ -12,6 +12,7 @@ import objects.territories.Territory;
 import spark.Request;
 import spark.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TerritoryController {
@@ -72,13 +73,26 @@ public class TerritoryController {
 
 
     public String putTerritory(Request req, Response res) {
+        res.type("application/json");
+        Territory territory = new Gson().fromJson(req.body(), Territory.class);
+        System.out.println("Json converted into Territory");
 
+        try {
+            Integer newId = this.territoryDao.update(territory);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return null;
     }
 
-    public String deleteTerritory(Request req, Response res) {
+    public Integer deleteTerritory(Request req, Response res) {
+        try {
+            this.territoryDao.delete(Integer.parseInt(req.params(":id")));
+            return Integer.parseInt(req.params(":id"));
+        } catch (SQLException e) {
+            return null;
+        }
 
-        return null;
     }
 
 

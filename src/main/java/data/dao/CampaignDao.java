@@ -83,7 +83,9 @@ public class CampaignDao {
     public Integer update(Campaign campaign) throws SQLException {
         try {
             String stmt = "UPDATE campaign" +
-                    "SET name = ?, notes = ?, password = ?" +
+                    "SET name = ?, " +
+                    "notes = ?, " +
+                    "password = ?" +
                     "WHERE id = ?;";
 
             PreparedStatement preparedStatement = service.createStatement(stmt);
