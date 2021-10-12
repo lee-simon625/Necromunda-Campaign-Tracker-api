@@ -28,12 +28,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="496ffc1e-7fc0-41b6-9598-bbfc34fc45ba">
-      <console name="Connection" type="STANDARD" schema="necromunda" session="Main"><![CDATA[SELECT territories.id, base_territories.name, base_territories.income, base_territories.recruit, base_territories.equipment, base_territories.special, base_territories.reputation, base_territories.gang_income, base_territories.gang_recruit, base_territories.gang_equipment, base_territories.gang_special, base_territories.gang_reputation 
-FROM territories 
-LEFT JOIN base_territories 
-ON territories.territory_id = base_territories.id
-WHERE territories.campaign_id=2
-ORDER BY base_territories.name ;]]></console>
+      <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
