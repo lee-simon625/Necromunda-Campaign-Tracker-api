@@ -79,26 +79,81 @@ public class GangDao {
     }
 
 
-    public void create(Gang gang) {
+    public Integer create(Gang gang) {
 
-        try{
-            String stmt="INSERT INTO gangs(campaign_id, player, gang_name, gang_type) VALUES (?,?,?,?,1000,1,0);";
+        try {
+            String stmt = "INSERT INTO gangs(campaign_id, player, gang_name, gang_type) VALUES (?,?,?,?,1000,1,0);";
             PreparedStatement preparedStatement = service.createStatement(stmt);
-            preparedStatement.setInt(1,gang.getCampaignID());
+            preparedStatement.setInt(1, gang.getCampaignID());
             preparedStatement.setString(2, gang.getPlayer());
-            preparedStatement.setString(3,gang.getName());
-            preparedStatement.setInt(4,gang.getGangTypeID());
+            preparedStatement.setString(3, gang.getName());
+            preparedStatement.setInt(4, gang.getGangTypeID());
 
             Integer newID = this.service.create(preparedStatement);
 
             System.out.println("Created Gang with ID: " + newID);
 
-
-
-        }catch(Exception e){ System.out.println(e);}
+            return newID;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
 
     }
 
+    public Integer update(Gang gang) throws SQLException {
+        try {
+            String stmt = "UPDATE gang" +
+                    "SET gangTypeID = ?, " +
+                    "player = ?, " +
+                    "name = ?, " +
+                    "gangType = ?, " +
+                    "totalValue = ?, " +
+                    "reputation = ?, " +
+                    "totalWins = ?" +
+                    "WHERE id = ?;";
+
+            PreparedStatement preparedStatement = service.createStatement(stmt);
+
+            preparedStatement.setInt(1, gang.getGangTypeID());
+            preparedStatement.setString(2, gang.getPlayer());
+            preparedStatement.setString(3, gang.getName());
+            preparedStatement.setString(4, gang.getGangType());
+            preparedStatement.setInt(5, gang.getTotalValue());
+            preparedStatement.setInt(6, gang.getReputation());
+            preparedStatement.setInt(7, gang.getTotalWins());
+            preparedStatement.setInt(8, gang.getId());
+
+
+            this.service.update(preparedStatement);
+            System.out.println("Updated Gang with ID: " + gang.getId());
+
+            return gang.getId();
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+    public Integer delete(Integer id) throws SQLException {
+        try {
+            String stmt = "DELETE FROM gang" +
+                    "WHERE id = ?";
+
+            PreparedStatement preparedStatement = service.createStatement(stmt);
+
+            preparedStatement.setInt(1, id);
+
+            this.service.delete(preparedStatement);
+
+            return id;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
 
 
 }

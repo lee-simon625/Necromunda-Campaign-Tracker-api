@@ -1,6 +1,5 @@
 package data.dao;
 
-import com.j256.ormlite.stmt.query.In;
 import data.MySQLService;
 import data.mappers.TerritoryMapper;
 import objects.territories.Territory;
@@ -12,13 +11,13 @@ import java.util.ArrayList;
 
 public class TerritoryDao {
 
-    private MySQLService service;
+    private final MySQLService service;
 
     public TerritoryDao(MySQLService service) {
         this.service = service;
     }
 
-    public ArrayList<Territory> list(Integer id) throws SQLException {
+    public ArrayList<Territory> list(Integer id) {
         try {
             String stmt = "SELECT " +
                     "territories.id, " +
@@ -140,6 +139,43 @@ public class TerritoryDao {
 
             return newID;
 
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public Integer update(Territory territory) throws SQLException {
+
+        try {
+            String stmt = "UPDATE territory" +
+                    "SET gang_id = ?, " +
+                    "WHERE id = ?";
+            PreparedStatement preparedStatement = service.createStatement(stmt);
+            preparedStatement.setInt(1, territory.getGangID());
+            preparedStatement.setInt(2, territory.getId());
+
+            this.service.update(preparedStatement);
+            return territory.getId();
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public Integer delete(Integer id) throws SQLException {
+        try {
+            String stmt = "DELETE FROM territory" +
+                    "WHERE id = ?";
+
+            PreparedStatement preparedStatement = service.createStatement(stmt);
+
+            preparedStatement.setInt(1, id);
+
+            this.service.delete(preparedStatement);
+
+            return id;
         } catch (Exception e) {
             System.out.println(e);
             return null;

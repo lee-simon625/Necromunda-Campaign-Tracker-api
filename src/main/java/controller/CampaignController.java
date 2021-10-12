@@ -10,6 +10,7 @@ import objects.Campaign;
 import spark.Request;
 import spark.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CampaignController {
@@ -20,7 +21,7 @@ public class CampaignController {
         this.campaignDao = new CampaignDao(service);
     }
 
-    public String getCampaigns(Request req, Response res) throws JsonProcessingException {
+    public String getCampaigns(Request req, Response res) {
         String jsonStr = "";
 
         try {
@@ -85,10 +86,16 @@ public class CampaignController {
     }
 
     public Integer deleteCampaign(Request req, Response res) {
-        return null;
+        try {
+            this.campaignDao.delete(Integer.parseInt(req.params(":id")));
+            res.body(String.valueOf(Integer.parseInt(req.params(":id"))));
+
+            return Integer.parseInt(req.params(":id"));
+        } catch (SQLException e) {
+            return null;
+        }
+
     }
-
-
 
 
 }
